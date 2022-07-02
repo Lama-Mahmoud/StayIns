@@ -1,4 +1,6 @@
-const Admin = require ("../../models/Admin")
+const Admin = require ("../../models/Admin");
+const Stay = require("../../models/Stay");
+const Fav = require("../../models/Fav");
 
 
 
@@ -24,10 +26,47 @@ async function getByEmail(email) {
       email
     });
   }
+  
 
+async function addStay(body){
+    const{
+        name,
+        price,
+        rate,
+        features,
+        admin,
+        urls
+    }=body
+    const stay= new Stay({
+        name,
+        urls,
+        features,
+        price,
+        rate,
+        admin
+    })
+    return await stay.save();
+}
+
+
+async function getByMac(mac) {
+    return await Fav.findOne({
+      mac
+    });
+  }
+
+
+async function addMac(body) {
+    const macAddress= body;
+    const mac=new Fav({macAddress})
+    return await mac.save();
+  }
 
 
 module.exports={
     getByEmail,
-    addAdmin
+    addAdmin,
+    addStay,
+    getByMac,
+    addMac
 }
