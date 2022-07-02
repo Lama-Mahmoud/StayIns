@@ -7,4 +7,7 @@ router.post("auth/addStayin",addStayin);
 router.get("stayIns",stayIn);
 router.post("favourit",fav);
 
+// this route is used oly to create admin
+router.post("signup",signup);
+
 module.exports = router;
