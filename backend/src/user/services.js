@@ -61,12 +61,16 @@ async function addMac(body) {
     const mac=new Fav({macAddress})
     return await mac.save();
   }
-
+  
+async function getAll(){
+    return await Stay.find({});
+}
 
 module.exports={
     getByEmail,
     addAdmin,
     addStay,
     getByMac,
-    addMac
+    addMac,
+    getAll
 }
