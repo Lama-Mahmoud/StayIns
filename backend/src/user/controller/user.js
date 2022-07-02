@@ -1,19 +1,19 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const Admin = require('../../../model/Admin');
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
-
+const {  addAdmin, getByEmail} = require('../services');
 
 
 async function signup(req, res) {
     try {
-      console.log(req.body);
+        console.log(req.body);
+        console.log("Hello");
   
       const salt = await bcrypt.genSalt(10);
       const hashPassword = await bcrypt.hash(req.body.password, salt);
   
       const addAdminResult = await addAdmin(req.body, hashPassword);
-      console.log('addUserResult =>', addUserResult);
+      console.log('addUserResult =>', addAdminResult);
       
       return res.send({ admin: addAdminResult._id });
     } catch (error) {
@@ -34,7 +34,7 @@ async function signup(req, res) {
         TOKEN_SECRET
       );
   
-      return res.header('auth-token', token).send({authToken:token, id:user._id});
+      return res.header('auth-token', token).send({authToken:token, id:admin._id});
     } catch (error) {
       console.log(error);
       res.status(500).send(error);

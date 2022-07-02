@@ -1,6 +1,4 @@
-const Fav = require ("../../models/Fav")
 const Admin = require ("../../models/Admin")
-const Stay = require ("../../models/Stay")
 
 
 
