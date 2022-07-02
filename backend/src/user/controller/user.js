@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../../../model/User');
+const Admin = require('../../../model/Admin');
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
 
 
@@ -23,14 +23,14 @@ async function signup(req, res) {
 
   async function login(req, res) {
     try {
-      const user = await getByEmail(req.body.email);
-      if (!user) return res.status(400).send('invalid credentials');
+      const admin = await getByEmail(req.body.email);
+      if (!admin) return res.status(400).send('invalid credentials');
   
-      const validPassword = await bcrypt.compare(req.body.password, user.password);
+      const validPassword = await bcrypt.compare(req.body.password, admin.password);
       if (!validPassword) return res.status(400).send('invalid credentials');
   
       const token = jwt.sign(
-        {_id: user._id, name: user.name, email: user.email},
+        {_id: admin._id, name: admin.name, email: admin.email},
         TOKEN_SECRET
       );
   
