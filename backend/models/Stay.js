@@ -9,7 +9,12 @@ const staySchema = new mongoose.Schema({
         max: 255,
       },
       
-    urls:[{
+      urls:[{
+        type:String,
+        required:true
+    }],
+    
+    features:[{
         type:String,
         required:true
     }],
