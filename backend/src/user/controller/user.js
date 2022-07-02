@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
-const {  addAdmin, getByEmail,addStay} = require('../services');
+const {  addAdmin, getByEmail,addStay, getAll} = require('../services');
 
 
 async function signup(req, res) {
@@ -54,9 +54,20 @@ async function signup(req, res) {
     }
   }
 
+  async function stayIn(res){
+    try{
+    const result= await getAll();
+    res.send({stays:result});
+    }catch(error){
+        console.log(error);
+    }
+    
+  }
+
 
   module.exports={
     login,
     signup,
-    addStayin
+    addStayin,
+    stayIn
   }
